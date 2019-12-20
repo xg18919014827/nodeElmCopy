@@ -5,13 +5,14 @@ import UserInfoModel from '../../models/v2/userinfo';
 
 class User extends AddressComponent {
     constructor() {
-        super()
+        super(); // ES6 要求，子类的构造函数必须执行一次 super 函数，否则会报错。
     }
     async getInfo(req, res, next) {
+        console.log(req.session);
         const sid = req.session.user_id;
         const qid = req.query.user_id;
         const user_id = sid || qid;
-        if (!use_id || !Number(user_id)) {
+        if (!user_id || !Number(user_id)) {
             res.send({
                 status: 0,
                 type: 'GET_USER_INFO_FAIELD',
