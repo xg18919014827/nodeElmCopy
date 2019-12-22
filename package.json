@@ -1,0 +1,45 @@
+{
+    "name": "node-elm",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "cross-env NODE_ENV=development nodemon --harmony index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bailicangdu/node-elm.git"
+    },
+    "author": "ace <578599619@qq.com>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/bailicangdu/node-elm/issues"
+    },
+    "homepage": "https://github.com/bailicangdu/node-elm#readme",
+    "dependencies": {
+        "babel": "^6.23.0",
+        "babel-cli": "^6.24.1",
+        "babel-core": "^6.24.0",
+        "babel-preset-es2015": "^6.24.0",
+        "babel-preset-stage-3": "^6.22.0",
+        "babel-register": "^6.24.0",
+        "chalk": "^2.4.2",
+        "config-lite": "^1.6.0",
+        "cookie-parser": "^1.4.4",
+        "cross-env": "^5.2.1",
+        "express": "^4.15.2",
+        "express-session": "^1.17.0",
+        "mongodb": "^2.2.25",
+        "mongoose": "^4.13.19",
+        "node-fetch": "^1.7.3",
+        "pinyin": "^2.9.0"
+    },
+    "devDependencies": {
+        "nodemon": "^1.18.6",
+        "babel-plugin-transform-async-to-generator": "^6.24.1",
+        "babel-plugin-transform-es2015-classes": "^6.24.1",
+        "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+        "babel-plugin-transform-export-extensions": "^6.22.0"
+    }
+}
