@@ -4,6 +4,7 @@ import config from 'config-lite';
 import chalk from 'chalk';
 
 mongoose.connect(config.url, { useMongoClient: true });
+mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.once('open', () => {
     console.log(

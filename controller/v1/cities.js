@@ -11,6 +11,7 @@ class CityHandle extends AddressComponent {
     }
     async getCity(req, res, next) {
         const type = req.query.type;
+        let cityInfo;
         try {
             switch (type) {
                 case "guess":
@@ -20,7 +21,7 @@ class CityHandle extends AddressComponent {
                 case "hot":
                     cityInfo = await Cities.cityHot();
                     break;
-                case "guess":
+                case "group":
                     cityInfo = await Cities.cityGroup();
                     break;
                 default:
@@ -33,6 +34,7 @@ class CityHandle extends AddressComponent {
             res.send(cityInfo);
         } catch (err) {
             res.send({
+                key: '1',
                 name: "ERROR_DATA",
                 message: "获取数据失败"
             });
