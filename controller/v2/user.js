@@ -2,6 +2,7 @@
 
 import AddressComponent from '../../prototype/addressComponent';
 import UserInfoModel from '../../models/v2/userinfo';
+import formidable from 'formidable';
 
 class User extends AddressComponent {
     constructor() {
@@ -42,6 +43,15 @@ class User extends AddressComponent {
                 message: '验证码失效'
             })
         }
+        const form = new formidable.IncomingForm();
+        form.parse(req, async(err, fields, files) => {
+            const { username, password, captcha_code } = fields;
+            if (!username) {
+                res.send({
+
+                })
+            }
+        })
         res.send({
             // msg: 'haha'
         })
