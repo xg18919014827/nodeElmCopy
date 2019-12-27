@@ -32,6 +32,20 @@ class User extends AddressComponent {
             });
         }
     }
+    async login(req, res, next) {
+        const cap = req.cookies.cap;
+        if (!cap) {
+            console.log('验证码失效');
+            res.send({
+                status: 0,
+                type: 'ERROR_CAPTCHA',
+                message: '验证码失效'
+            })
+        }
+        res.send({
+            // msg: 'haha'
+        })
+    }
 }
 
 export default new User();

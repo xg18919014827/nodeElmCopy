@@ -49,6 +49,25 @@ citySchema.statics.cityHot = function() {
     })
 }
 
+// 获取所以城市列表（按首字母排）
+citySchema.statics.cityGroup = function() {
+    return new Promise(async(resolve, reject) => {
+        try {
+            const city = await this.findOne();
+            // console.log(city);
+            const cityObj = city.data;
+            resolve(cityObj);
+        } catch (error) {
+            reject({
+                key: '2',
+                name: 'ERROR_DATA',
+                message: '查找数据失败'
+            })
+            console.log(error);
+        }
+    })
+}
+
 const Cities = mongoose.model("Cities", citySchema);
 
 Cities.findOne((err, data) => {

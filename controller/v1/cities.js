@@ -15,7 +15,7 @@ class CityHandle extends AddressComponent {
         try {
             switch (type) {
                 case "guess":
-                    const city = await this.getCityName(req);
+                    const city = await this.getCityName(req); //类内部方法调用内部方法用this
                     cityInfo = await Cities.cityGuess(city);
                     break;
                 case "hot":
@@ -34,7 +34,6 @@ class CityHandle extends AddressComponent {
             res.send(cityInfo);
         } catch (err) {
             res.send({
-                key: '1',
                 name: "ERROR_DATA",
                 message: "获取数据失败"
             });
@@ -53,7 +52,7 @@ class CityHandle extends AddressComponent {
             });
             return cityName;
         } catch (err) {
-            return "北京";
+            return "北京"; //类似resolve('北京')
         }
     }
 }
