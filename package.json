@@ -35,7 +35,7 @@
         "express-session": "^1.17.0",
         "formidable": "^1.2.1",
         "mongodb": "^2.2.25",
-        "mongoose": "^4.13.19",
+        "mongoose": "^5.7.5",
         "node-fetch": "^1.7.3",
         "pinyin": "^2.9.0",
         "time-formater": "^1.1.3"
