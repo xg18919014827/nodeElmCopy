@@ -3,7 +3,9 @@
 import fetch from "node-fetch";
 
 export default class BaseComponent {
-    constructor() {}
+    constructor() {
+        this.idList = ['restaurant_id', 'food_id', 'order_id', 'user_id', 'address_id', 'cart_id', 'img_id', 'category_id', 'item_id', 'sku_id', 'admin_id', 'statis_id'];
+    }
     async fetch(url = "", data = {}, type = "GET", resType = "JSON") { //函数设置默认值的方式
         type = type.toUpperCase();
         resType = resType.toUpperCase();
