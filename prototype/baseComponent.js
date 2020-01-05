@@ -1,6 +1,6 @@
 "use strict";
 
-import fetch from "node-fetch";
+import fetch from "node-fetch"; //ajax请求的封装，用于发起ajax请求
 
 export default class BaseComponent {
     constructor() {

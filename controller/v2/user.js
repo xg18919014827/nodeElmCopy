@@ -18,31 +18,31 @@ class User extends AddressComponent {
         this.chanegPassword = this.chanegPassword.bind(this);
     }
     async getInfo(req, res, next) {
-        // console.log(req.session);
-        const sid = req.session.user_id;
-        const qid = req.query.user_id;
-        const user_id = sid || qid;
-        if (!user_id || !Number(user_id)) {
-            res.send({
-                status: 0,
-                type: "GET_USER_INFO_FAIELD",
-                message: "通过session获取一个用户信息失败"
-            });
-            return;
+            // console.log(req.session);
+            const sid = req.session.user_id;
+            const qid = req.query.user_id;
+            const user_id = sid || qid;
+            if (!user_id || !Number(user_id)) {
+                res.send({
+                    status: 0,
+                    type: "GET_USER_INFO_FAIELD",
+                    message: "通过session获取一个用户信息失败"
+                });
+                return;
+            }
+            try {
+                const userinfo = await UserInfoModel.findOne({ user_id }, "-_id");
+                res.send(userinfo);
+            } catch (err) {
+                console.log("通过session获取一个用户信息失败", err);
+                res.send({
+                    status: 0,
+                    type: "GET_USER_INFO_FAIELD",
+                    message: "通过session获取一个用户信息失败"
+                });
+            }
         }
-        try {
-            const userinfo = await UserInfoModel.findOne({ user_id }, "-_id");
-            res.send(userinfo);
-        } catch (err) {
-            console.log("通过session获取一个用户信息失败", err);
-            res.send({
-                status: 0,
-                type: "GET_USER_INFO_FAIELD",
-                message: "通过session获取一个用户信息失败"
-            });
-        }
-    }
-
+        // 登录
     async login(req, res, next) {
         const cap = req.cookies.cap;
         if (!cap) {
@@ -86,13 +86,6 @@ class User extends AddressComponent {
             const newPassword = this.encryption(password);
             //判断用户是否存在，若否，则创建新用户
             try {
-                UserModel.update({ username }, { 'password': '0ts9W6EvMj4sq0mK7NgThQ==' }, function(err, res) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log(res);
-                    }
-                });
                 const user = await UserModel.findOne({ username });
                 if (!user) {
                     const user_id = await this.getId("user_id");
