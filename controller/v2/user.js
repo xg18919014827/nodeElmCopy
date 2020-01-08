@@ -13,7 +13,7 @@ import UderInfoModel from "../../models/v2/userinfo";
 class User extends AddressComponent {
     constructor() {
         super(); // ES6 要求，子类的构造函数必须执行一次 super 函数，否则会报错。
-        this.login = this.login.bind(this);
+        this.login = this.login.bind(this); //bind一下，等同于箭头函数；
         this.encryption = this.encryption.bind(this);
         this.chanegPassword = this.chanegPassword.bind(this);
     }
