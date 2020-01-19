@@ -34,9 +34,12 @@
         "express": "^4.15.2",
         "express-session": "^1.17.0",
         "formidable": "^1.2.1",
+        "fs": "0.0.1-security",
+        "gm": "^1.23.1",
         "mongodb": "^2.2.25",
         "mongoose": "^4.13.19",
         "node-fetch": "^1.7.3",
+        "path": "^0.12.7",
         "pinyin": "^2.9.0",
         "time-formater": "^1.1.3"
     },

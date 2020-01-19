@@ -8,7 +8,6 @@ import UserModel from "../../models/v2/user";
 import Ids from "../../models/ids";
 import { isDate } from "util";
 import dtime from "time-formater";
-import UderInfoModel from "../../models/v2/userinfo";
 
 class User extends AddressComponent {
     constructor() {
@@ -16,6 +15,7 @@ class User extends AddressComponent {
         this.login = this.login.bind(this); //bind一下，等同于箭头函数；
         this.encryption = this.encryption.bind(this);
         this.chanegPassword = this.chanegPassword.bind(this);
+        this.updateAvatar = this.updateAvatar.bind(this);
     }
     async getInfo(req, res, next) {
             // console.log(req.session);
@@ -228,19 +228,49 @@ class User extends AddressComponent {
         return md5.update(password).digest("base64");
     }
     async getId(type) {
-        if (!this.idList.includes(type)) {
-            console.log("id类型错误");
-            throw new Error("id类型错误");
+            if (!this.idList.includes(type)) {
+                console.log("id类型错误");
+                throw new Error("id类型错误");
+                return;
+            }
+            try {
+                const idData = await Ids.findOne();
+                idData[type]++;
+                await idData.save();
+                return idData[type];
+            } catch (error) {
+                console.log("获取ID数据失败");
+                throw new Error(error);
+            }
+        }
+        //更新头像
+    async updateAvatar(req, res, next) {
+        const sid = req.session.user_id;
+        const pid = req.params.user_id;
+        const user_id = sid || pid;
+        if (!user_id || !Number(user_id)) {
+            console.log('更新头像，user_id错误', user_id);
+            res.send({
+                status: 0,
+                type: 'ERROR_USERID',
+                message: 'user_id错误'
+            })
             return;
         }
         try {
-            const idData = await Ids.findOne();
-            idData[type]++;
-            await idData.save();
-            return idData[type];
+            const image_path = await this.getPath(req, res);
+            await UserInfoModel.findOneAndUpdate({ user_id }, { $set: { avatar: image_path } });
+            res.send({
+                status: 1,
+                image_path
+            })
         } catch (error) {
-            console.log("获取ID数据失败");
-            throw new Error(error);
+            console.log('图片上传失败', error);
+            res.send({
+                status: 0,
+                type: 'ERROR_UPLOAD_IMG',
+                msg: '上传图片失败'
+            })
         }
     }
 }
